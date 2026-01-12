@@ -4,19 +4,23 @@ import { FileText, ArrowUpRight } from "lucide-react";
 import { publications } from "@/data/portfolio";
 
 const PublicationsSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  if (publications.length === 0) return null;
+  if (!publications || publications.length === 0) return null;
 
   return (
-    <section id="publications" className="py-32 relative overflow-hidden">
+    <section id="publications" className="relative py-32 overflow-hidden">
       {/* Background accent */}
-      <div className="absolute right-0 top-1/4 w-1/3 h-1/2 opacity-30 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 100% 50%, hsl(var(--accent) / 0.08), transparent 60%)" }}
+      <div
+        className="absolute right-0 top-1/4 w-1/3 h-1/2 opacity-30 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 100% 50%, hsl(var(--accent) / 0.08), transparent 60%)",
+        }}
       />
-      
-      <div className="section-container">
+
+      <div className="section-container relative z-10">
         <div className="max-w-4xl mx-auto" ref={ref}>
           {/* Section header */}
           <motion.div
@@ -41,22 +45,34 @@ const PublicationsSection = () => {
             {publications.map((pub, index) => (
               <motion.a
                 key={pub.id}
-                href={pub.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={pub.link || "#"}
+                target={pub.link ? "_blank" : undefined}
+                rel={pub.link ? "noopener noreferrer" : undefined}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ 
-                  duration: 0.8, 
+                transition={{
+                  duration: 0.8,
                   delay: 0.2 + index * 0.15,
-                  ease: [0.16, 1, 0.3, 1] 
+                  ease: [0.16, 1, 0.3, 1],
                 }}
                 className="group block card-premium rounded-xl p-6 md:p-8"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors duration-500">
-                    <FileText className="w-5 h-5 text-accent" />
+                  {/* Logo / Icon */}
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 overflow-hidden group-hover:bg-accent/20 transition-colors duration-500">
+                    {pub.logo ? (
+                      <img
+                        src={pub.logo}
+                        alt={pub.venue}
+                        className="w-6 h-6 object-contain"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <FileText className="w-5 h-5 text-accent" />
+                    )}
                   </div>
+
+                  {/* Content */}
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-4">
                       <div>
@@ -67,7 +83,10 @@ const PublicationsSection = () => {
                           {pub.venue} · {pub.year}
                         </p>
                       </div>
-                      <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 flex-shrink-0" />
+
+                      {pub.link && (
+                        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 flex-shrink-0" />
+                      )}
                     </div>
                   </div>
                 </div>

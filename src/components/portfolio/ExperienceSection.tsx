@@ -4,20 +4,26 @@ import { Briefcase } from "lucide-react";
 import { experiences } from "@/data/portfolio";
 
 const ExperienceSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-32 relative" style={{ background: "var(--gradient-section)" }}>
+    <section
+      id="experience"
+      className="relative py-32"
+      style={{ background: "var(--gradient-section)" }}
+    >
       {/* Background pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" 
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
-          backgroundSize: "40px 40px"
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)",
+          backgroundSize: "40px 40px",
         }}
       />
-      
-      <div className="section-container">
+
+      <div className="section-container relative z-10">
         <div className="max-w-5xl mx-auto" ref={ref}>
           {/* Section header */}
           <motion.div
@@ -44,20 +50,29 @@ const ExperienceSection = () => {
                 key={exp.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ 
-                  duration: 0.8, 
+                transition={{
+                  duration: 0.8,
                   delay: 0.2 + index * 0.15,
-                  ease: [0.16, 1, 0.3, 1] 
+                  ease: [0.16, 1, 0.3, 1],
                 }}
                 className="group relative"
               >
                 <div className="card-premium rounded-xl p-8 md:p-10">
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors duration-500">
-                      <Briefcase className="w-5 h-5 text-accent" />
+                    {/* Logo / Icon */}
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 overflow-hidden group-hover:bg-accent/20 transition-colors duration-500">
+                      {exp.logo ? (
+                        <img
+                          src={exp.logo}
+                          alt={exp.company}
+                          className="w-7 h-7 object-contain"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <Briefcase className="w-5 h-5 text-accent" />
+                      )}
                     </div>
-                    
+
                     {/* Content */}
                     <div className="flex-1">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
@@ -69,14 +84,12 @@ const ExperienceSection = () => {
                             {exp.company}
                           </p>
                         </div>
-                        <span className="badge-elegant">
-                          {exp.duration}
-                        </span>
+                        <span className="badge-elegant">{exp.duration}</span>
                       </div>
-                      
+
                       <ul className="space-y-3">
                         {exp.description.map((item, i) => (
-                          <li 
+                          <li
                             key={i}
                             className="font-body text-muted-foreground leading-relaxed flex items-start gap-3"
                           >
@@ -88,7 +101,7 @@ const ExperienceSection = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Connector line */}
                 {index < experiences.length - 1 && (
                   <div className="hidden md:block absolute left-[3.25rem] top-full w-px h-8 bg-gradient-to-b from-border to-transparent" />

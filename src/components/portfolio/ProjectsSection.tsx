@@ -1,23 +1,32 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, ArrowUpRight, Folder } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  ArrowUpRight,
+  Folder,
+} from "lucide-react";
 import { projects } from "@/data/portfolio";
 
 const ProjectsSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="py-32 relative overflow-hidden">
+    <section id="projects" className="relative py-32 overflow-hidden">
       {/* Background accent */}
-      <div className="absolute -left-1/4 top-1/4 w-1/2 h-1/2 rounded-full opacity-50 pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.05), transparent 60%)" }}
+      <div
+        className="absolute -left-1/4 top-1/4 w-1/2 h-1/2 rounded-full opacity-50 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, hsl(var(--accent) / 0.05), transparent 60%)",
+        }}
       />
-      
-      <div className="section-container">
+
+      <div className="section-container relative z-10">
         <div ref={ref}>
           {/* Section header */}
           <motion.div
@@ -44,30 +53,41 @@ const ProjectsSection = () => {
                 key={project.id}
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ 
-                  duration: 0.8, 
+                transition={{
+                  duration: 0.8,
                   delay: 0.2 + index * 0.15,
-                  ease: [0.16, 1, 0.3, 1] 
+                  ease: [0.16, 1, 0.3, 1],
                 }}
                 className="group"
               >
                 <div className="card-premium glow rounded-2xl p-8 md:p-10 relative overflow-hidden">
                   {/* Project number */}
                   <div className="absolute top-6 right-6 md:top-8 md:right-10 font-display text-6xl md:text-7xl font-bold text-foreground/[0.03]">
-                    {String(index + 1).padStart(2, '0')}
+                    {String(index + 1).padStart(2, "0")}
                   </div>
-                  
+
                   <div className="relative">
                     <div className="flex items-start justify-between gap-4 mb-6">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                          <Folder className="w-5 h-5 text-accent" />
+                        {/* Image / Icon */}
+                        <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center overflow-hidden">
+                          {project.image ? (
+                            <img
+                              src={project.image}
+                              alt={project.title}
+                              className="w-8 h-8 object-contain"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <Folder className="w-5 h-5 text-accent" />
+                          )}
                         </div>
+
                         <h3 className="font-display text-2xl md:text-3xl font-medium text-foreground group-hover:text-accent transition-colors duration-300">
                           {project.title}
                         </h3>
                       </div>
-                      
+
                       <div className="flex items-center gap-2">
                         {project.github && (
                           <a
@@ -93,17 +113,14 @@ const ProjectsSection = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     <p className="font-body text-muted-foreground leading-relaxed mb-8 max-w-2xl text-lg">
                       {project.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="badge-elegant"
-                        >
+                        <span key={tech} className="badge-elegant">
                           {tech}
                         </span>
                       ))}
@@ -123,10 +140,12 @@ const ProjectsSection = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex items-center gap-4 mb-8"
               >
-                <span className="text-sm font-body text-muted-foreground">More projects</span>
+                <span className="text-sm font-body text-muted-foreground">
+                  More projects
+                </span>
                 <div className="flex-1 h-px bg-border" />
               </motion.div>
-              
+
               <div className="grid sm:grid-cols-2 gap-4">
                 {otherProjects.map((project, index) => (
                   <motion.a
@@ -136,10 +155,10 @@ const ProjectsSection = () => {
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ 
-                      duration: 0.6, 
+                    transition={{
+                      duration: 0.6,
                       delay: 0.7 + index * 0.1,
-                      ease: [0.16, 1, 0.3, 1] 
+                      ease: [0.16, 1, 0.3, 1],
                     }}
                     className="group p-6 bg-card/50 border border-border/50 rounded-xl hover:border-accent/30 hover:bg-card transition-all duration-500"
                   >
