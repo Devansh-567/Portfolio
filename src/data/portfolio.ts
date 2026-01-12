@@ -291,7 +291,7 @@ export const education = [
   {
     id: 1,
     institution: "G.H. Raisoni International Skill Tech University",
-    degree: "Bachelor of Technology in Computer Science",
+    degree: "Bachelor of Technology in Computer Engineering",
     duration: "2024 — 2028 {Expected}",
     logo: "/assets/media/education/ghristu.png",
     coursework: ["Algorithms", "Computer Architecture", "Machine Learning", "Computer Networks"],
@@ -344,7 +344,7 @@ export const media = [
     date: "July 2025",
     description:
       "",
-    link: "https://www.linkedin.com/in/devansh050607/details/honors/1752990929655/single-media-viewer?type=IMAGE&profileId=ACoAAFLC2hUBahpd1br1qCrzUUAdj3kDO33YNTo&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_honors_details%3BTrG67U5%2FRMS5b1AnLEX%2Flg%3D%3D",
+    link: "https://www.linkedin.com/in/devansh050607/details/honors/1752991143040/single-media-viewer?type=IMAGE&profileId=ACoAAFLC2hUBahpd1br1qCrzUUAdj3kDO33YNTo&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_honors_details%3B0O6VpVEkTYaWMhDJEScX6w%3D%3D",
     type: "Media",
     image: "/assets/media/news/4.jpeg",
   },
