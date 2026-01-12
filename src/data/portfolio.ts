@@ -311,7 +311,7 @@ export const media = [
   outlet: "NavRashtra News",
   date: "July 2025",
   description: "",
-  link: "https://www.linkedin.com/in/devansh050607", 
+  link: "https://www.linkedin.com/in/devansh050607/details/honors/1752993464055/single-media-viewer?type=IMAGE&profileId=ACoAAFLC2hUBahpd1br1qCrzUUAdj3kDO33YNTo&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_honors_details%3BSBJ0n5ulSuevz%2FGQVoyRLg%3D%3D", 
   type: "News",
   image: "/assets/media/news/1.jpeg",
   },
