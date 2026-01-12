@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowUpRight } from "lucide-react";
 import { achievements } from "@/data/portfolio";
 
 const AchievementsSection = () => {
@@ -38,8 +38,11 @@ const AchievementsSection = () => {
           {/* Grid */}
           <div className="grid sm:grid-cols-2 gap-6">
             {achievements.map((item, index) => (
-              <motion.article
+              <motion.a
                 key={item.id}
+                href={item.link || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -47,7 +50,7 @@ const AchievementsSection = () => {
                   delay: 0.2 + index * 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="card-premium rounded-xl p-6 md:p-8"
+                className="group block card-premium rounded-xl p-6 md:p-8 hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-start gap-4">
                   {/* Medal Image */}
@@ -61,11 +64,12 @@ const AchievementsSection = () => {
 
                   {/* Content */}
                   <div className="flex-1">
-                    <div className="flex justify-between gap-4 mb-2">
-                      <h3 className="text-lg font-medium">
+                    <div className="flex justify-between items-center gap-4 mb-2">
+                      <h3 className="text-lg font-medium group-hover:text-accent transition-colors duration-300">
                         {item.title}
                       </h3>
-                      <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">
+                      {/* Fixed Year Badge */}
+                      <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded flex-shrink-0">
                         {item.year}
                       </span>
                     </div>
@@ -80,9 +84,17 @@ const AchievementsSection = () => {
                         {item.location}
                       </div>
                     )}
+
+                    {item.link && (
+                      <div className="mt-3">
+                        <span className="text-accent text-xs flex items-center gap-1 group-hover:underline">
+                          View Details <ArrowUpRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </motion.article>
+              </motion.a>
             ))}
           </div>
         </div>
