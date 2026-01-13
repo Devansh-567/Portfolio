@@ -1,117 +1,173 @@
-import { motion } from "framer-motion";
-import { Download, Github, Linkedin, Code2, Mail, Menu } from "lucide-react";
-import { useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  Download,
+  Github,
+  Linkedin,
+  Code2,
+  Mail,
+  Menu,
+  X
+} from "lucide-react";
+import { useState, useEffect } from "react";
 import { personalInfo, navigation } from "@/data/portfolio";
 
 const Quickbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 0.1],
+    ["rgba(0,0,0,0.35)", "rgba(0,0,0,0.75)"]
+  );
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const socialLinks = [
     { icon: Download, href: personalInfo.resumeUrl, label: "Resume", download: true },
     { icon: Github, href: personalInfo.social.github, label: "GitHub" },
     { icon: Linkedin, href: personalInfo.social.linkedin, label: "LinkedIn" },
     { icon: Code2, href: personalInfo.social.leetcode, label: "LeetCode" },
-    { icon: Mail, href: `mailto:${personalInfo.email}`, label: "Email" },
   ];
 
   const scrollToSection = (id: string) => {
     setIsMenuOpen(false);
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
+      {/* Scroll progress – subtle */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-px bg-accent/40 z-[60] origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-4"
       >
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between backdrop-blur-xl bg-background/70 border border-border/50 rounded-2xl px-5 py-3 shadow-sm"
-            style={{ boxShadow: "var(--shadow-md)" }}
+          <motion.div
+            style={{ backgroundColor }}
+            animate={{
+              backdropFilter: isScrolled ? "blur(18px)" : "blur(10px)"
+            }}
+            className="flex items-center justify-between border border-border/50 rounded-2xl px-5 py-3 shadow-xl relative"
           >
             {/* Logo */}
-            <button
+            <motion.button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="font-display text-xl font-medium text-foreground hover:text-accent transition-colors duration-300 tracking-tight"
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              className="font-display text-lg font-medium text-foreground flex items-center gap-2"
             >
-              <span className="text-gradient">DS</span>
-            </button>
+              <span>Devansh</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+            </motion.button>
 
-            {/* Navigation Links - Desktop */}
+            {/* Desktop navigation */}
             <div className="hidden lg:flex items-center gap-1">
-              {navigation.map((item) => (
-                <button
+              {navigation.map((item, index) => (
+                <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="px-4 py-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.08 }}
+                  whileHover={{ y: -1 }}
+                  className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-secondary"
                 >
                   {item.label}
-                </button>
+                </motion.button>
               ))}
             </div>
 
-            {/* Social Links */}
+            {/* Social + mobile */}
             <div className="flex items-center gap-1">
-              {socialLinks.slice(0, 4).map(({ icon: Icon, href, label, download }) => (
-                <a
+              {socialLinks.map(({ icon: Icon, href, label, download }, index) => (
+                <motion.a
                   key={label}
                   href={href}
                   target={download ? undefined : "_blank"}
                   rel={download ? undefined : "noopener noreferrer"}
                   download={download ? "Devansh_Singh_Resume.pdf" : undefined}
-                  className="p-2.5 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-xl transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 + index * 0.08 }}
+                  whileHover={{ y: -1 }}
+                  className="p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-xl transition-all"
                   aria-label={label}
                 >
                   <Icon className="w-4 h-4" />
-                </a>
+                </motion.a>
               ))}
-              
-              {/* Mobile menu button */}
-              <button 
+
+              <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-xl transition-all duration-300 ml-1"
+                whileTap={{ scale: 0.9 }}
+                className="lg:hidden p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-xl ml-1"
               >
-                <Menu className="w-4 h-4" />
-              </button>
+                {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.nav>
 
       {/* Mobile menu */}
       <motion.div
         initial={false}
-        animate={isMenuOpen ? { opacity: 1, y: 0, pointerEvents: "auto" as const } : { opacity: 0, y: -10, pointerEvents: "none" as const }}
-        transition={{ duration: 0.3 }}
+        animate={
+          isMenuOpen
+            ? { opacity: 1, y: 0, pointerEvents: "auto" }
+            : { opacity: 0, y: -20, pointerEvents: "none" }
+        }
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-20 left-4 right-4 z-40 lg:hidden"
       >
-        <div className="backdrop-blur-xl bg-background/95 border border-border/50 rounded-2xl p-4 shadow-lg"
-          style={{ boxShadow: "var(--shadow-lg)" }}
-        >
+        <div className="backdrop-blur-xl bg-black/85 border border-border/50 rounded-2xl p-4 shadow-xl">
           <div className="grid grid-cols-2 gap-2">
-            {navigation.map((item) => (
-              <button
+            {navigation.map((item, index) => (
+              <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="px-4 py-3 text-sm font-body text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-xl transition-all duration-300 text-left"
+                initial={{ opacity: 0, x: -10 }}
+                animate={isMenuOpen ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: index * 0.08 }}
+                className="px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary rounded-xl text-left"
               >
                 {item.label}
-              </button>
+              </motion.button>
             ))}
           </div>
+
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent/15 hover:bg-accent/25 text-accent rounded-xl transition-all"
+          >
+            <Mail className="w-4 h-4" />
+            <span className="text-sm font-medium">Get in touch</span>
+          </a>
         </div>
       </motion.div>
 
-      {/* Overlay for mobile menu */}
-      {isMenuOpen && (
-        <div 
-          className="fixed inset-0 z-30 lg:hidden" 
-          onClick={() => setIsMenuOpen(false)}
-        />
-      )}
+      {/* Overlay */}
+      <motion.div
+        animate={{
+          opacity: isMenuOpen ? 1 : 0,
+          pointerEvents: isMenuOpen ? "auto" : "none",
+        }}
+        onClick={() => setIsMenuOpen(false)}
+        className="fixed inset-0 z-30 lg:hidden bg-black/50 backdrop-blur-sm"
+      />
     </>
   );
 };
