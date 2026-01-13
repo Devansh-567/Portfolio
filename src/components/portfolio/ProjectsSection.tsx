@@ -1,25 +1,29 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   ExternalLink,
   Github,
   ArrowUpRight,
   Folder,
+  Cpu
 } from "lucide-react";
 import { projects } from "@/data/portfolio";
 
 const ProjectsSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
 
   return (
     <section id="projects" className="relative py-32 overflow-hidden">
-      {/* Background accent */}
-      <div
+      {/* Ambient accent */}
+      <motion.div
         className="absolute -left-1/4 top-1/4 w-1/2 h-1/2 rounded-full opacity-50 pointer-events-none"
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         style={{
           background:
             "radial-gradient(circle, hsl(var(--accent) / 0.05), transparent 60%)",
@@ -28,7 +32,7 @@ const ProjectsSection = () => {
 
       <div className="section-container relative z-10">
         <div ref={ref}>
-          {/* Section header */}
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -37,7 +41,8 @@ const ProjectsSection = () => {
           >
             <span className="number-accent">03</span>
             <div>
-              <span className="text-xs font-body uppercase tracking-[0.3em] text-accent block mb-2">
+              <span className="text-xs font-body uppercase tracking-[0.3em] text-accent block mb-2 flex items-center gap-2">
+                <Cpu className="w-3 h-3" />
                 Portfolio
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-medium text-foreground">
@@ -46,8 +51,8 @@ const ProjectsSection = () => {
             </div>
           </motion.div>
 
-          {/* Featured Projects */}
-          <div className="space-y-6 mb-20">
+          {/* Featured projects */}
+          <div className="space-y-8 mb-24">
             {featuredProjects.map((project, index) => (
               <motion.article
                 key={project.id}
@@ -58,19 +63,36 @@ const ProjectsSection = () => {
                   delay: 0.2 + index * 0.15,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group"
+                onHoverStart={() => setHoveredProject(project.id)}
+                onHoverEnd={() => setHoveredProject(null)}
+                whileHover={{ y: -4 }}
+                className="group relative"
               >
-                <div className="card-premium glow rounded-2xl p-8 md:p-10 relative overflow-hidden">
-                  {/* Project number */}
+                <div className="card-premium rounded-2xl p-8 md:p-10 relative overflow-hidden">
+                  {/* Hover glow */}
+                  <motion.div
+                    className="absolute inset-0 opacity-0"
+                    animate={{
+                      opacity: hoveredProject === project.id ? 1 : 0,
+                      background:
+                        "radial-gradient(circle at 50% 50%, hsl(var(--accent) / 0.08), transparent 70%)",
+                    }}
+                    transition={{ duration: 0.4 }}
+                  />
+
+                  {/* Watermark index */}
                   <div className="absolute top-6 right-6 md:top-8 md:right-10 font-display text-6xl md:text-7xl font-bold text-foreground/[0.03]">
                     {String(index + 1).padStart(2, "0")}
                   </div>
 
-                  <div className="relative">
+                  <div className="relative z-10">
                     <div className="flex items-start justify-between gap-4 mb-6">
                       <div className="flex items-center gap-4">
-                        {/* Image / Icon */}
-                        <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center overflow-hidden">
+                        {/* Icon */}
+                        <motion.div
+                          className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center"
+                          whileHover={{ scale: 1.05 }}
+                        >
                           {project.image ? (
                             <img
                               src={project.image}
@@ -81,43 +103,68 @@ const ProjectsSection = () => {
                           ) : (
                             <Folder className="w-5 h-5 text-accent" />
                           )}
-                        </div>
+                        </motion.div>
 
-                        <h3 className="font-display text-2xl md:text-3xl font-medium text-foreground group-hover:text-accent transition-colors duration-300">
-                          {project.title}
-                        </h3>
+                        {/* Title */}
+                        <div>
+                          <motion.h3
+                            className="font-display text-2xl md:text-3xl font-medium text-foreground"
+                            animate={{
+                              color:
+                                hoveredProject === project.id
+                                  ? "hsl(var(--accent))"
+                                  : "hsl(var(--foreground))",
+                            }}
+                          >
+                            {project.title}
+                          </motion.h3>
+
+                          {/* Underline reveal */}
+                          <motion.div
+                            className="h-px bg-accent mt-1"
+                            initial={{ width: 0 }}
+                            animate={{
+                              width:
+                                hoveredProject === project.id ? "100%" : 0,
+                            }}
+                            transition={{ duration: 0.4 }}
+                          />
+                        </div>
                       </div>
 
+                      {/* Links */}
                       <div className="flex items-center gap-2">
                         {project.github && (
-                          <a
+                          <motion.a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-all duration-300"
-                            aria-label="View GitHub repository"
+                            whileHover={{ y: -2 }}
+                            className="p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg"
                           >
                             <Github className="w-5 h-5" />
-                          </a>
+                          </motion.a>
                         )}
                         {project.live && (
-                          <a
+                          <motion.a
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-all duration-300"
-                            aria-label="View live demo"
+                            whileHover={{ y: -2 }}
+                            className="p-2.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg"
                           >
                             <ExternalLink className="w-5 h-5" />
-                          </a>
+                          </motion.a>
                         )}
                       </div>
                     </div>
 
+                    {/* Description */}
                     <p className="font-body text-muted-foreground leading-relaxed mb-8 max-w-2xl text-lg">
                       {project.description}
                     </p>
 
+                    {/* Tech stack */}
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
                         <span key={tech} className="badge-elegant">
@@ -131,20 +178,15 @@ const ProjectsSection = () => {
             ))}
           </div>
 
-          {/* Other Projects */}
+          {/* Other projects */}
           {otherProjects.length > 0 && (
             <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex items-center gap-4 mb-8"
-              >
+              <div className="flex items-center gap-4 mb-8">
                 <span className="text-sm font-body text-muted-foreground">
                   More projects
                 </span>
                 <div className="flex-1 h-px bg-border" />
-              </motion.div>
+              </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {otherProjects.map((project, index) => (
@@ -157,17 +199,19 @@ const ProjectsSection = () => {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{
                       duration: 0.6,
-                      delay: 0.7 + index * 0.1,
+                      delay: 0.6 + index * 0.1,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="group p-6 bg-card/50 border border-border/50 rounded-xl hover:border-accent/30 hover:bg-card transition-all duration-500"
+                    whileHover={{ y: -3 }}
+                    className="group p-6 bg-card/50 border border-border/50 rounded-xl hover:border-accent/30 transition-all"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <h4 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors duration-300">
+                      <h4 className="font-display text-lg font-medium text-foreground group-hover:text-accent transition-colors">
                         {project.title}
                       </h4>
-                      <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors" />
                     </div>
+
                     <p className="font-body text-sm text-muted-foreground leading-relaxed">
                       {project.description}
                     </p>
