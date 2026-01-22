@@ -260,7 +260,7 @@ export const projects = [
   {
     id: 1,
     title: "Chronomap",
-     description: "A production-ready Python library for time-versioned data management with rollback, audit trails, and persistent storage. Designed for high concurrency using async I/O and thread-safe locking, reducing latency by 35% while maintaining 95% test coverage. Published on PyPI with 18,000+ downloads, enabling traceable configuration versioning and time-series analytics at scale.",
+     description: "A production-ready Python library for time-versioned data management with rollback, audit trails, and persistent storage. Designed for high concurrency using async I/O and thread-safe locking, reducing latency by 35% while maintaining 95% test coverage. Published on PyPI with 20,000+ downloads, enabling traceable configuration versioning and time-series analytics at scale.",
      tech: ["Python", "Asyncio", "Threading", "PyTest", "JSON", "Pickle"],
      live: "https://pypi.org/project/chronomap/",
      featured: true,
