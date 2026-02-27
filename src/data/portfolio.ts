@@ -196,7 +196,7 @@ export const publications = [
     title: "Delta Encoding and Predictive Modeling for Lossy Time-Series Compression Using Adaptive Linear Updates",
     venue: "Paper not dispalyed on IEEE Xplore yet",
     year: "2025",
-    link: "",
+    link: "https://ieeexplore.ieee.org/document/11368175",
     logo: "/assets/media/paper/ieee.png",
 
   },
@@ -213,7 +213,7 @@ export const publications = [
     title: "SMEE: Self-Mutating AES-GCM Framework for Adaptive Encryption",
     venue: "Paper not dispalyed on IEEE Xplore yet",
     year: "2025",
-    link: "",
+    link: "https://ieeexplore.ieee.org/document/11367979",
     logo: "/assets/media/paper/ieee.png",
 
   },
@@ -222,7 +222,7 @@ export const publications = [
     title: "Parallel Task Scheduling and Dynamic Offloading for Deep Learning and Matrix Computation: APTOS Framework",
     venue: "Paper not dispalyed on IEEE Xplore yet",
     year: "2025",
-    link: "",
+    link: "https://ieeexplore.ieee.org/document/11368305",
     logo: "/assets/media/paper/ieee.png",
 
   },
