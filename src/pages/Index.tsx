@@ -1,14 +1,19 @@
+<<<<<<< HEAD
 import { lazy, Suspense, useEffect } from "react";
 const Stage = lazy(() => import("@/stage/Stage"));
 import Quickbar from "@/components/portfolio/Quickbar";
 import PowerReserve from "@/components/portfolio/PowerReserve";
 import Film from "@/components/portfolio/Film";
+=======
+import Quickbar from "@/components/portfolio/Quickbar";
+>>>>>>> origin/main
 import HeroSection from "@/components/portfolio/HeroSection";
 import AboutSection from "@/components/portfolio/AboutSection";
 import ExperienceSection from "@/components/portfolio/ExperienceSection";
 import ProjectsSection from "@/components/portfolio/ProjectsSection";
 import PublicationsSection from "@/components/portfolio/PublicationsSection";
 import AchievementsSection from "@/components/portfolio/AchievementsSection";
+<<<<<<< HEAD
 import NewsMediaSection from "@/components/portfolio/NewsMediaSection";
 import EducationSection from "@/components/portfolio/EducationSection";
 import ContactSection from "@/components/portfolio/ContactSection";
@@ -40,6 +45,17 @@ const Index = () => {
       <div className="grain" aria-hidden="true" />
       <Quickbar />
       <PowerReserve />
+=======
+import EducationSection from "@/components/portfolio/EducationSection"
+import NewsMediaSection from "@/components/portfolio/NewsMediaSection";
+import ContactSection from "@/components/portfolio/ContactSection";
+import Footer from "@/components/portfolio/Footer";
+
+const Index = () => {
+  return (
+    <main className="min-h-screen bg-background">
+      <Quickbar />
+>>>>>>> origin/main
       <HeroSection />
       <AboutSection />
       <ExperienceSection />
@@ -49,11 +65,15 @@ const Index = () => {
       <NewsMediaSection />
       <EducationSection />
       <ContactSection />
+<<<<<<< HEAD
       <Film />
       <div className="free-bar" role="region" aria-label="Free controls">
         <p>Drag a wheel to turn the train. Drag the plate to look around. Scroll to zoom.</p>
         <button className="btn btn--sm btn--solid" onClick={() => cinema.set({ free: false })}>Back to the story</button>
       </div>
+=======
+      <Footer />
+>>>>>>> origin/main
     </main>
   );
 };
