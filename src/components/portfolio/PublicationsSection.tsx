@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { ArrowUpRight } from "lucide-react";
 import { publications } from "@/data/portfolio";
 import { useReveal } from "@/lib/useReveal";
@@ -44,7 +44,7 @@ const PublicationsSection = () => {
             );
           })}
         </div>
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { FileText, ArrowUpRight } from "lucide-react";
@@ -218,7 +218,7 @@ const PublicationsSection = () => {
             </div>
           </div>
         </div>
->>>>>>> origin/main
+
       </div>
     </section>
   );

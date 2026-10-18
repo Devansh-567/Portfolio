@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useEffect, useState } from "react";
 import { Download, Film, Hand } from "lucide-react";
 import { personalInfo } from "@/data/portfolio";
@@ -42,7 +42,7 @@ const HeroSection = () => {
         </div>
       </div>
       <p className="hero__hint hero__fade">Grab any wheel. The rest of the movement follows.</p>
-=======
+
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { ArrowDown, Sparkles, Code, Rocket, Zap } from "lucide-react";
 import { personalInfo } from "@/data/portfolio";
@@ -480,7 +480,7 @@ const HeroSection = () => {
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
         style={{ background: "linear-gradient(to top, hsl(var(--background)), transparent)" }}
       />
->>>>>>> origin/main
+
     </section>
   );
 };

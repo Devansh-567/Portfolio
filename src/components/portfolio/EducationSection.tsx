@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { education } from "@/data/portfolio";
 import { useReveal } from "@/lib/useReveal";
 import LogoMark from "./LogoMark";
@@ -27,7 +27,7 @@ const EducationSection = () => {
               ))}
             </ul>
           </div>
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { GraduationCap, Award, MapPin, ExternalLink, BookOpen, Star } from "lucide-react";
@@ -419,7 +419,7 @@ const EducationSection = () => {
               </div>
             </>
           )}
->>>>>>> origin/main
+
         </div>
       </div>
     </section>

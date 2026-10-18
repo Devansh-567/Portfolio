@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { media } from "@/data/portfolio";
 import { useReveal } from "@/lib/useReveal";
 
@@ -25,7 +25,7 @@ const NewsMediaSection = () => {
                 </figcaption>
               </figure>
             ))}
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowUpRight, Newspaper } from "lucide-react";
@@ -207,7 +207,7 @@ const NewsMediaSection = () => {
                 </motion.a>
               ))}
             </div>
->>>>>>> origin/main
+
           </div>
         </div>
       </div>

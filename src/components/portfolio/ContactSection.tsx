@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useEffect, useState } from "react";
 import { Download, Send } from "lucide-react";
 import { personalInfo } from "@/data/portfolio";
@@ -31,7 +31,7 @@ const ContactSection = () => {
       } else setStatus("err");
     } catch {
       setStatus("err");
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Sparkles, Send, Check, AlertCircle, MessageCircle } from "lucide-react";
@@ -65,12 +65,12 @@ const ContactSection = () => {
     } catch {
       setStatus("error");
       setTimeout(() => setStatus("idle"), 5000);
->>>>>>> origin/main
+
     }
   };
 
   return (
-<<<<<<< HEAD
+
     <section id="contact" className="scene scene--tall">
       <div className="wrap">
         <div className="contact">
@@ -129,7 +129,7 @@ const ContactSection = () => {
           <span>{personalInfo.location}: <Clock /></span>
           <button onClick={() => goTo("top")}>Back to the start</button>
         </footer>
-=======
+
     <section id="contact" className="py-32 relative overflow-hidden" style={{ background: "var(--gradient-section)" }}>
       {/* Animated background waves */}
       <div className="absolute inset-0 opacity-30">
@@ -423,7 +423,7 @@ const ContactSection = () => {
             ease: "easeInOut"
           }}
         />
->>>>>>> origin/main
+
       </div>
     </section>
   );

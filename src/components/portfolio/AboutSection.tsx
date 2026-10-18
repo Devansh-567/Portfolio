@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useEffect, useRef, useState } from "react";
 import { honorCounts, organizations, publications, stack } from "@/data/portfolio";
 import { useReveal } from "@/lib/useReveal";
@@ -92,7 +92,7 @@ const AboutSection = () => {
                 </div>
               ))}
             </dl>
-=======
+
 import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { Quote, Sparkles, Heart } from "lucide-react";
@@ -332,7 +332,7 @@ const AboutSection = () => {
                 <Sparkles className="w-4 h-4 text-accent/20" />
               </motion.div>
             </motion.div>
->>>>>>> origin/main
+
           </div>
         </div>
       </div>

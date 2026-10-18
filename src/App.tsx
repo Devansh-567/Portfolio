@@ -1,15 +1,15 @@
-<<<<<<< HEAD
-=======
+
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
->>>>>>> origin/main
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-<<<<<<< HEAD
+
 const App = () => (
   <BrowserRouter>
     <Routes>
@@ -17,7 +17,7 @@ const App = () => (
       <Route path="*" element={<NotFound />} />
     </Routes>
   </BrowserRouter>
-=======
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -34,7 +34,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
->>>>>>> origin/main
+
 );
 
 export default App;

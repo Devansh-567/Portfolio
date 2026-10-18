@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useMemo, useState } from "react";
 import { organizations, personalInfo } from "@/data/portfolio";
 import { useReveal } from "@/lib/useReveal";
@@ -125,7 +125,7 @@ const ExperienceSection = () => {
               </div>
             </article>
           ))}
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Briefcase, Zap, TrendingUp, Code } from "lucide-react";
@@ -501,7 +501,7 @@ const ExperienceSection = () => {
             </span>
             <Zap className="w-3 h-3 text-accent/60" />
           </motion.div>
->>>>>>> origin/main
+
         </div>
       </div>
     </section>

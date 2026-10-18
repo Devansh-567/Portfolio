@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-<<<<<<< HEAD
+
 import { lazy, Suspense, useEffect } from "react";
 const Stage = lazy(() => import("@/stage/Stage"));
 
@@ -18,7 +18,7 @@ const NotFound = () => {
         <a className="btn btn--solid" href="/" style={{ justifySelf: "center" }}>Return home</a>
       </div>
     </main>
-=======
+
 import { useEffect } from "react";
 
 const NotFound = () => {
@@ -38,7 +38,7 @@ const NotFound = () => {
         </a>
       </div>
     </div>
->>>>>>> origin/main
+
   );
 };
 

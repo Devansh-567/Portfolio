@@ -1,10 +1,10 @@
-// ===========================================
+// =
 // PORTFOLIO DATA - Edit this file to update content
-// ===========================================
+// =
 
 export const personalInfo = {
   name: "Devansh Singh",
-<<<<<<< HEAD
+
   role: "Software engineer and academic reviewer",
   intro:
     "Computer engineering undergraduate and R&D intern at CSIR National Chemical Laboratory. I write systems software, publish with IEEE, and ship open-source tools.",
@@ -15,13 +15,13 @@ export const personalInfo = {
   resumeUrl: "/resume.pdf",
   resumeFile: "Devansh_Singh_Resume.pdf",
   resumeUpdated: "October 2026",
-=======
+
   tagline: "Creating technology that matters.",
   description: "Hackathons | Research | PyPI Package author | Public Speaking",
   email: "devansh.jay.singh@gmail.com",
   location: "India",
   resumeUrl: "/resume.pdf",
->>>>>>> origin/main
+
   social: {
     github: "https://github.com/Devansh-567/",
     linkedin: "https://linkedin.com/in/devansh050607",
@@ -29,7 +29,7 @@ export const personalInfo = {
   },
 };
 
-<<<<<<< HEAD
+
 // Film chapters, in page order. `id` matches the section element id.
 export const chapters = [
   { id: "top", numeral: "I", title: "Prologue", nav: "Home" },
@@ -207,7 +207,7 @@ export const stack = [
   { group: "Frontend", items: "Next.js, React, TailwindCSS" },
   { group: "Cloud and DevOps", items: "AWS, Docker, GitHub Actions, Cloudflare, Supabase" },
   { group: "Databases", items: "PostgreSQL, MySQL, Prisma ORM" },
-=======
+
 export const about = {
   paragraphs: [
     "I build software with a strong focus on clarity, impact, and thoughtful system design.",
@@ -552,5 +552,5 @@ export const navigation = [
   { id: "media", label: "Media" }, 
   { id: "education", label: "Education" },
   { id: "contact", label: "Contact" },
->>>>>>> origin/main
+
 ];

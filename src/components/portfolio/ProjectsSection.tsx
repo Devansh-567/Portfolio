@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/portfolio";
@@ -90,7 +90,7 @@ const ProjectsSection = () => {
             </div>
             <div className="block"><TypeDemo /></div>
           </article>
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import {
@@ -313,7 +313,7 @@ const ProjectsSection = () => {
               </div>
             </>
           )}
->>>>>>> origin/main
+
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useEffect, useState } from "react";
 import { Download, Film, Menu, Volume2, VolumeX, X } from "lucide-react";
 import { chapters, personalInfo } from "@/data/portfolio";
@@ -39,7 +39,7 @@ const Quickbar = () => {
   const go = (id: string) => {
     setOpen(false);
     goTo(id);
-=======
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Download,
@@ -80,12 +80,12 @@ const Quickbar = () => {
   const scrollToSection = (id: string) => {
     setIsMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
->>>>>>> origin/main
+
   };
 
   return (
     <>
-<<<<<<< HEAD
+
       <nav className={`nav ${solid ? "is-solid" : ""}`} aria-label="Primary">
         <button className="brand" onClick={() => go("top")} aria-label="Back to the top">
           <span className="crown">DS</span>
@@ -132,7 +132,7 @@ const Quickbar = () => {
           </a>
         </div>
       </div>
-=======
+
       {/* Scroll progress – subtle */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-px bg-accent/40 z-[60] origin-left"
@@ -259,7 +259,7 @@ const Quickbar = () => {
         onClick={() => setIsMenuOpen(false)}
         className="fixed inset-0 z-30 lg:hidden bg-black/50 backdrop-blur-sm"
       />
->>>>>>> origin/main
+
     </>
   );
 };

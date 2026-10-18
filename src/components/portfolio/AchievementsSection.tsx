@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { achievements, honorCounts, medalImage } from "@/data/portfolio";
@@ -89,7 +89,7 @@ const AchievementsSection = () => {
             ))}
           </AnimatePresence>
         </ul>
-=======
+
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { MapPin, ArrowUpRight, Trophy, Award, Star } from "lucide-react";
@@ -386,7 +386,7 @@ const AchievementsSection = () => {
             </div>
           )}
         </div>
->>>>>>> origin/main
+
       </div>
     </section>
   );
